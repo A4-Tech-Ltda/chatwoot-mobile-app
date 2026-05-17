@@ -13,58 +13,73 @@ Status: concluido
 
 ## MOB-01 - Identidade nativa
 
-Status: pendente
+Status: em validacao
 
-- [ ] Definir/confirmar nome publico final.
-- [ ] Definir/confirmar bundle id iOS.
-- [ ] Definir/confirmar package Android.
-- [ ] Definir/confirmar scheme.
-- [ ] Atualizar `app.config.ts`.
-- [ ] Atualizar `.env.example`.
-- [ ] Rodar `npx expo config --type public`.
+- [x] Definir/confirmar nome publico final.
+- [x] Definir/confirmar bundle id iOS.
+- [x] Definir/confirmar package Android.
+- [x] Definir/confirmar scheme.
+- [x] Atualizar `app.config.ts`.
+- [x] Atualizar `.env.example`.
+- [x] Rodar `npx expo config --type public`.
 
 ## MOB-02 - Assets
 
-Status: pendente
+Status: em validacao
 
-- [ ] Levantar arquivos de marca do fork web.
-- [ ] Gerar `assets/icon.png`.
-- [ ] Gerar `assets/adaptive-icon.png`.
-- [ ] Gerar `assets/splash.png`.
-- [ ] Atualizar logos em `src/assets/images/` e `src/assets/local/`.
+- [x] Levantar arquivos de marca do fork web.
+- [x] Gerar `assets/icon.png`.
+- [x] Gerar `assets/adaptive-icon.png`.
+- [x] Gerar `assets/splash.png`.
+- [x] Atualizar logos em `src/assets/images/` e `src/assets/local/`.
 - [ ] Validar visual em iOS e Android.
 
 ## MOB-03 - URL default e login
 
-Status: pendente
+Status: em validacao
 
-- [ ] Apontar default para `chat.conversacomagente.com.br`.
-- [ ] Atualizar `settingsSlice`.
-- [ ] Atualizar `ConfigURLScreen`.
-- [ ] Atualizar `LoginScreen`.
-- [ ] Remover copy que sugere `app.chatwoot.com`.
-- [ ] Validar `/api` e `/cable`.
+- [x] Apontar default para `chat.conversacomagente.com.br`.
+- [x] Atualizar `settingsSlice`.
+- [x] Atualizar `ConfigURLScreen`.
+- [x] Atualizar `LoginScreen`.
+- [x] Remover copy que sugere `app.chatwoot.com`.
+- [x] Validar `/api` e `/cable`.
 
 ## MOB-04 - Deep links e SSO
 
-Status: pendente
+Status: em validacao
 
-- [ ] Trocar scheme `chatwootapp` por `conversacomagente`.
-- [ ] Atualizar `SSO_CALLBACK_URL`.
-- [ ] Atualizar parsing em `ssoUtils` e `navigation`.
-- [ ] Atualizar associated domains e Android intent filters.
+- [x] Trocar scheme `chatwootapp` por `conversacomagente`.
+- [x] Atualizar `SSO_CALLBACK_URL`.
+- [x] Atualizar parsing em `ssoUtils` e `navigation`.
+- [x] Atualizar associated domains e Android intent filters.
+- [x] Documentar AASA e assetlinks no host Chatwoot.
 - [ ] Criar/instalar AASA e assetlinks no host Chatwoot.
 - [ ] Validar abertura de conversa por link/push.
 
 ## MOB-05 - Textos e i18n
 
-Status: pendente
+Status: em validacao
 
-- [ ] Rebrand em `src/i18n/pt_BR.json`.
-- [ ] Rebrand em `src/i18n/pt.json`.
-- [ ] Rebrand em `src/i18n/en.json`.
-- [ ] Atualizar README publico do fork.
-- [ ] Rodar busca por strings visiveis restantes.
+- [x] Rebrand em `src/i18n/pt_BR.json`.
+- [x] Rebrand em `src/i18n/pt.json`.
+- [x] Rebrand em `src/i18n/en.json`.
+- [x] Atualizar README publico do fork.
+- [x] Rodar busca por strings visiveis restantes.
+
+## Validacoes executadas
+
+- `pnpm exec expo config --type public`: manifesto gerado com `Conversa com Agente`, `br.com.conversacomagente.app`, `conversacomagente` e `chat.conversacomagente.com.br`.
+- `pnpm exec eslint` nos arquivos tocados de TS/TSX: ok.
+- `node` parseando todos os `src/i18n/*.json`: ok.
+- `git diff --check`: ok.
+- `GET https://chat.conversacomagente.com.br/api`: HTTP 200, versao `4.9.1`; observacao: `data_services` retornou `failing`.
+- WebSocket `https://chat.conversacomagente.com.br/cable` com upgrade: HTTP 101 e mensagens `welcome`/`ping`.
+
+## Observacoes
+
+- `pnpm lint` global ainda falha por erros preexistentes de Prettier/ESLint fora do escopo desta mudanca.
+- `pnpm exec prettier --write` nao aceita `.env.example` sem parser explicito; o arquivo foi mantido manualmente.
 
 ## MOB-06 - Push notifications
 

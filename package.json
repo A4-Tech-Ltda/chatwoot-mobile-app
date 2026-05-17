@@ -1,5 +1,5 @@
 {
-  "name": "@chatwoot/mobile-app",
+  "name": "@a4-tech/conversa-com-agente-mobile",
   "version": "4.5.0",
   "packageManager": "pnpm@10.11.0",
   "scripts": {

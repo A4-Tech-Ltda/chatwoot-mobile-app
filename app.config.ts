@@ -1,15 +1,25 @@
 import { ConfigContext, ExpoConfig } from 'expo/config';
 
+const appName = process.env.EXPO_PUBLIC_APP_NAME || 'Conversa com Agente';
+const appSlug = process.env.EXPO_PUBLIC_APP_SLUG || 'conversa-com-agente-mobile';
+const appScheme = process.env.EXPO_PUBLIC_APP_SCHEME || 'conversacomagente';
+const associatedDomain =
+  process.env.EXPO_PUBLIC_ASSOCIATED_DOMAIN || 'chat.conversacomagente.com.br';
+const iosBundleIdentifier =
+  process.env.EXPO_PUBLIC_IOS_BUNDLE_IDENTIFIER || 'br.com.conversacomagente.app';
+const androidPackage = process.env.EXPO_PUBLIC_ANDROID_PACKAGE || 'br.com.conversacomagente.app';
+const easOwner = process.env.EXPO_PUBLIC_EAS_OWNER || undefined;
+
 export default ({ config }: ConfigContext): ExpoConfig => {
   return {
-    name: 'Chatwoot',
-    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'chatwoot-mobile',
+    name: appName,
+    slug: appSlug,
     version: '4.5.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
     userInterfaceStyle: 'light',
     newArchEnabled: false,
-    scheme: 'chatwootapp',
+    scheme: appScheme,
     splash: {
       image: './assets/splash.png',
       resizeMode: 'contain',
@@ -18,26 +28,27 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.chatwoot.app',
+      bundleIdentifier: iosBundleIdentifier,
       infoPlist: {
         NSCameraUsageDescription:
-          'This app requires access to the camera to upload images and videos.',
+          'O Conversa com Agente precisa acessar a camera para enviar imagens e videos.',
         NSPhotoLibraryUsageDescription:
-          'This app requires access to the photo library to upload images.',
-        NSMicrophoneUsageDescription: 'This app requires access to the microphone to record audio.',
+          'O Conversa com Agente precisa acessar sua biblioteca de fotos para enviar imagens.',
+        NSMicrophoneUsageDescription:
+          'O Conversa com Agente precisa acessar o microfone para gravar audio.',
         NSAppleMusicUsageDescription:
-          'This app does not use Apple Music, but a system API may require this permission.',
+          'O Conversa com Agente nao usa Apple Music, mas uma API do sistema pode solicitar esta permissao.',
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
       // Please use the relative path to the google-services.json file
       googleServicesFile: process.env.EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE,
       entitlements: { 'aps-environment': 'production' },
-      associatedDomains: ['applinks:app.chatwoot.com'],
+      associatedDomains: [`applinks:${associatedDomain}`],
     },
     android: {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
-      package: 'com.chatwoot.app',
+      package: androidPackage,
       permissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO'],
       // Please use the relative path to the google-services.json file
       googleServicesFile: process.env.EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE,
@@ -48,7 +59,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           data: [
             {
               scheme: 'https',
-              host: 'app.chatwoot.com',
+              host: associatedDomain,
               pathPrefix: '/app/accounts/',
               pathPattern: '/*/conversations/*',
             },
@@ -59,7 +70,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           action: 'VIEW',
           data: [
             {
-              scheme: 'chatwootapp',
+              scheme: appScheme,
             },
           ],
           category: ['BROWSABLE', 'DEFAULT'],
@@ -72,7 +83,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },
-    owner: 'chatwoot',
+    ...(easOwner ? { owner: easOwner } : {}),
     plugins: [
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],

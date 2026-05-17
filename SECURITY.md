@@ -1,56 +1,33 @@
-Chatwoot is looking forward to working with security researchers worldwide to keep Chatwoot and our users safe. If you have found an issue in our systems/applications, please reach out to us.
+# Security Policy
+
+Este fork pertence ao Conversa com Agente/A4 Tech.
 
 ## Reporting a Vulnerability
 
-We use Github to track the security issues that affect our project. If you believe you have found a vulnerability, please disclose it via this [form](https://github.com/chatwoot/chatwoot/security/advisories/new). This will enable us to review the vulnerability, fix it promptly, and reward you for your efforts.
+Nao abra issues publicas com detalhes exploraveis. Envie a vulnerabilidade pelo canal interno de seguranca da A4 Tech ou pelo responsavel tecnico do projeto.
 
-If you have any questions about the process, contact security@chatwoot.com. 
+Inclua, quando possivel:
 
-Please try your best to describe a clear and realistic impact for your report, and please don't open any public issues on GitHub or social media; we're doing our best to respond through Github as quickly as possible.
+- impacto realista;
+- passos de reproducao;
+- versao/build afetada;
+- dispositivo, sistema operacional e ambiente usados no teste;
+- evidencias em texto, imagem ou video.
 
-> Note: Please use the email for questions related to the process. Disclosures should be done via [Github](https://github.com/chatwoot/chatwoot/security/advisories/new)
-## Supported versions
+## Escopo
 
-| Version | Supported        |
-| ------- | --------------   |
-| latest   | ️✅               |
-| <latest   | ❌               |
+Entram no escopo:
 
+- app mobile Conversa com Agente;
+- configuracao de deep links e push ligada ao app;
+- integracao mobile com `chat.conversacomagente.com.br`.
 
-## Vulnerabilities we care about 🫣
-> Note: Please do not perform testing against Chatwoot production services. Use a `self-hosted instance` to perform tests.
-- Remote command execution
-- SQL Injection
-- Authentication bypass
-- Privilege Escalation
-- Cross-site scripting (XSS)
-- Performing limited admin actions without authorization
-- CSRF
+Ficam fora do escopo por padrao:
 
-You can learn more about our triaging process [here](https://www.chatwoot.com/docs/contributing-guide/security-reports).
+- ataques de engenharia social;
+- testes destrutivos contra producao;
+- ataques de negacao de servico;
+- reports sem impacto demonstravel;
+- achados apenas de scanners automatizados sem validacao manual.
 
-## Non-Qualifying Vulnerabilities
-
-We consider the following out of scope, though there may be exceptions.
-
-- Missing HTTP security headers
-- Incomplete/Missing SPF/DKIM
-- Reports from automated tools or scanners
-- Theoretical attacks without proof of exploitability
-- Social engineering
-- Reflected file download
-- Physical attacks
-- Weak SSL/TLS/SSH algorithms or protocols
-- Attacks involving physical access to a user's device or a device or network that's already seriously compromised (e.g., man-in-the-middle).
-- The user attacks themselves
-- Incomplete/Missing SPF/DKIM
-- Denial of Service attacks
-- Brute force attacks
-- DNSSEC
-
-If you are unsure about the scope, please create a [report](https://github.com/chatwoot/chatwoot/security/advisories/new).
-
-
-## Thanks
-
-Thank you for keeping Chatwoot and our users safe. 🙇
+Use ambientes de teste sempre que possivel.

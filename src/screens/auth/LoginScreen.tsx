@@ -35,6 +35,12 @@ import { setLocale } from '@/store/settings/settingsSlice';
 import { useRefsContext } from '@/context/RefsContext';
 import { SsoUtils } from '@/utils/ssoUtils';
 
+const defaultInstallationHost = (
+  process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL || 'https://chat.conversacomagente.com.br'
+)
+  .replace(/^https?:\/\//, '')
+  .replace(/\/.*$/, '');
+
 type FormData = {
   email: string;
   password: string;
@@ -104,8 +110,7 @@ const LoginScreen = () => {
   };
 
   // TODO: Change this condition based on EE check
-  // Show SSO login button only if installation URL contains app.chatwoot.com
-  const showSsoLogin = installationUrl.includes('app.chatwoot.com');
+  const showSsoLogin = installationUrl.includes(defaultInstallationHost);
 
   const openResetPassword = () => {
     navigation.navigate('ResetPassword' as never);

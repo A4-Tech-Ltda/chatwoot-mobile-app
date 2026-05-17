@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Animated, StatusBar, TextInput, View } from 'react-native';
-import * as Application from 'expo-application';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Icon } from '@/components-next';
 import { URL_WITHOUT_HTTP_REGEX } from '@/constants';
@@ -17,7 +16,11 @@ type FormData = {
   url: string;
 };
 
-const appName = Application.applicationName;
+const defaultBaseUrl = (
+  process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL || 'https://chat.conversacomagente.com.br'
+)
+  .replace(/^https?:\/\//, '')
+  .replace(/\/$/, '');
 
 const ConfigURLScreen = () => {
   const baseUrl = useAppSelector(selectBaseUrl);
@@ -30,7 +33,7 @@ const ConfigURLScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      url: baseUrl ? baseUrl : appName === 'Chatwoot' ? 'app.chatwoot.com' : '',
+      url: baseUrl || defaultBaseUrl,
     },
   });
 

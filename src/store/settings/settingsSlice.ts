@@ -4,6 +4,16 @@ import * as RootNavigation from '@/utils/navigationUtils';
 import { NotificationSettings } from './settingsTypes';
 import { Theme } from '@/types/common/Theme';
 
+const DEFAULT_CHATWOOT_BASE_URL =
+  process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL || 'https://chat.conversacomagente.com.br';
+const DEFAULT_INSTALLATION_URL = DEFAULT_CHATWOOT_BASE_URL.endsWith('/')
+  ? DEFAULT_CHATWOOT_BASE_URL
+  : `${DEFAULT_CHATWOOT_BASE_URL}/`;
+const DEFAULT_BASE_URL = DEFAULT_INSTALLATION_URL.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const DEFAULT_WEB_SOCKET_URL = DEFAULT_INSTALLATION_URL.replace(/^https:\/\//, 'wss://')
+  .replace(/^http:\/\//, 'ws://')
+  .replace(/\/$/, '/cable');
+
 interface SettingsState {
   baseUrl: string;
   installationUrl: string;
@@ -20,8 +30,8 @@ interface SettingsState {
   pushToken: string;
 }
 const initialState: SettingsState = {
-  baseUrl: 'app.chatwoot.com',
-  installationUrl: 'https://app.chatwoot.com/',
+  baseUrl: DEFAULT_BASE_URL,
+  installationUrl: DEFAULT_INSTALLATION_URL,
   uiFlags: {
     isSettingUrl: false,
     isUpdating: false,
@@ -37,7 +47,7 @@ const initialState: SettingsState = {
     selected_push_flags: [],
     user_id: 0,
   },
-  webSocketUrl: 'wss://app.chatwoot.com/cable',
+  webSocketUrl: DEFAULT_WEB_SOCKET_URL,
   theme: 'system',
   version: '',
   pushToken: '',

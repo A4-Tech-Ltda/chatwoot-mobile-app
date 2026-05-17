@@ -1,6 +1,12 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
 
+const defaultInstallationHost = (
+  process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL || 'https://chat.conversacomagente.com.br'
+)
+  .replace(/^https?:\/\//, '')
+  .replace(/\/.*$/, '');
+
 export const selectSettings = (state: RootState) => state.settings;
 
 export const selectInstallationUrl = createSelector(
@@ -32,7 +38,7 @@ export const selectWebSocketUrl = createSelector(selectSettings, settings => set
 export const selectTheme = createSelector(selectSettings, settings => settings.theme);
 
 export const selectIsChatwootCloud = createSelector(selectSettings, settings =>
-  settings.installationUrl.includes('app.chatwoot.com'),
+  settings.installationUrl.includes(defaultInstallationHost),
 );
 
 export const selectChatwootVersion = createSelector(selectSettings, settings => settings.version);
