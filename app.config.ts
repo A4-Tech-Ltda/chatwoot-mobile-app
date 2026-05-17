@@ -9,6 +9,7 @@ const iosBundleIdentifier =
   process.env.EXPO_PUBLIC_IOS_BUNDLE_IDENTIFIER || 'br.com.conversacomagente.app';
 const androidPackage = process.env.EXPO_PUBLIC_ANDROID_PACKAGE || 'br.com.conversacomagente.app';
 const easOwner = process.env.EXPO_PUBLIC_EAS_OWNER || undefined;
+const appleTeamId = process.env.EXPO_APPLE_TEAM_ID || undefined;
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   return {
@@ -29,6 +30,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     ios: {
       supportsTablet: true,
       bundleIdentifier: iosBundleIdentifier,
+      ...(appleTeamId ? { appleTeamId } : {}),
       infoPlist: {
         NSCameraUsageDescription:
           'O Conversa com Agente precisa acessar a camera para enviar imagens e videos.',
